@@ -8,6 +8,8 @@ gem "actionpack",    RAILS_VERSION
 gem "actionmailer",  RAILS_VERSION
 gem "railties",      RAILS_VERSION
 gem "activerecord",  RAILS_VERSION
+gem "globalid", ">= 1.2"
+gem 'ostruct'
 
 # gems used by the dummy application
 gem "jquery-rails"

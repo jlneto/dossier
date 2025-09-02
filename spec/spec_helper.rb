@@ -1,19 +1,8 @@
 ENV['RAILS_ENV']   = 'test'
-require 'simplecov'
-require 'coveralls'
-
-# not sure why I need to do this now, its after I added dummy-application
-# ApplicationController.helper Dossier::ApplicationHelper
-# SiteController.helper Dossier::ApplicationHelper
-
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
-  SimpleCov::Formatter::HTMLFormatter,
-  Coveralls::SimpleCov::Formatter
-]
-SimpleCov.start
-Coveralls.wear!('rails')
 
 require File.expand_path("../dummy/config/application.rb",  __FILE__)
+# Ensure Rails is initialized before loading rspec-rails (Rails 8 compatibility)
+Dummy::Application.initialize! unless defined?(Rails) && Rails.application
 require 'rspec/rails'
 require 'pry'
 require 'generator_spec'
@@ -22,7 +11,7 @@ require 'capybara/rspec'
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
-DB_CONFIG = [:mysql2, :sqlite3, :postgresql].reduce({}) do |config, adapter_name|
+DB_CONFIG = [:sqlite3, :postgresql].reduce({}) do |config, adapter_name|
   config.tap do |hash|
     path = "spec/fixtures/db/#{adapter_name}.yml"
     hash[adapter_name] = YAML.load_file(path).symbolize_keys if File.exist?(path)

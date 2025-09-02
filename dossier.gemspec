@@ -14,13 +14,15 @@ Gem::Specification.new do |s|
   s.homepage    = "https://github.com/tma1/dossier"
   s.license     = 'MIT'
 
+  # s.required_ruby_version = ">= 3.2.0"
+
   s.files = Dir["{app,config,db,lib}/**/*"] + %w[MIT-LICENSE Rakefile README.md VERSION]
   s.test_files = Dir["spec/**/*"] - %w[spec/dummy/config/dossier.yml]
 
-  s.add_dependency "activesupport"
-  s.add_dependency "actionpack"
-  s.add_dependency "actionmailer"
-  s.add_dependency "railties"
+  s.add_dependency "activesupport", ">= 6.1", "< 9.0"
+  s.add_dependency "actionpack",    ">= 6.1", "< 9.0"
+  s.add_dependency "actionmailer",  ">= 6.1", "< 9.0"
+  s.add_dependency "railties",      ">= 6.1", "< 9.0"
   s.add_dependency "haml"
   s.add_dependency "responders"
 

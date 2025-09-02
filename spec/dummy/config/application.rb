@@ -1,13 +1,13 @@
-ENV['BUNDLE_GEMFILE'] = File.expand_path('../../../../Gemfile', __FILE__)
+# Standard Rails application configuration for dummy app used in specs
+require_relative 'boot'
 
-require 'rubygems'
-require 'bundler'
+# Ensure URI is initialized before any libraries that patch it (Ruby 3.4 + Rails 8 compatibility)
+require 'uri'
+require 'rails/all'
 
-Bundler.setup
-
-require "rails/all"
-
-Bundler.require
+# Require the gems listed in Gemfile, including any gems
+# you've limited to :test, :development, or :production.
+Bundler.require(*Rails.groups)
 
 module Dummy
   class Application < ::Rails::Application

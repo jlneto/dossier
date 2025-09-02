@@ -296,12 +296,27 @@ See the referenced gems for more documentation on using them.
 
 Note: when you run the tests, Dossier will **make and/or truncate** some tables in the `dossier_test` database.
 
-- Run `bundle`
-- `RAILS_ENV=test rake db:create`
-- `cp spec/dummy/config/database.yml{.example,}` and edit it so that it can connect to the test database.
-- `cp spec/fixtures/db/mysql2.yml{.example,}`
-- `cp spec/fixtures/db/sqlite3.yml{.example,}`
-- `rspec spec`
+- Ensure you have Ruby >= 3.2 and Bundler installed.
+- Run `bundle install`
+- If you have Postgres available and want to run system specs that hit the dummy app DB, run: `RAILS_ENV=test bundle exec rake db:create` inside the repo root (uses spec/dummy/config/database.yml.example).
+- Copy example DB configs as needed so specs can connect:
+  - `cp spec/dummy/config/database.yml{.example,}` and edit it if necessary.
+  - `cp spec/fixtures/db/mysql2.yml{.example,}` if you want to exercise MySQL adapter.
+  - `cp spec/fixtures/db/sqlite3.yml{.example,}` to run against SQLite.
+- Run test suite: `bundle exec rspec`
+
+### Como testar esta gem (pt-BR)
+
+- Requisitos: Ruby >= 3.2, Bundler e um banco (PostgreSQL, MySQL ou SQLite) para os testes de integração do dummy app.
+- Instale as dependências: `bundle install`
+- Opcional (DB do dummy app): `RAILS_ENV=test bundle exec rake db:create`
+- Copie os arquivos de exemplo de configuração:
+  - `cp spec/dummy/config/database.yml{.example,}` e ajuste as credenciais.
+  - `cp spec/fixtures/db/mysql2.yml{.example,}` (para MySQL)
+  - `cp spec/fixtures/db/sqlite3.yml{.example,}` (para SQLite)
+- Execute: `bundle exec rspec`
+
+Observação: Por padrão, o Gemfile está apontando para Rails ~> 8.0. Se quiser testar contra outra versão do Rails, defina a variável de ambiente `RAILS_VERSION`, por exemplo: `RAILS_VERSION="~> 7.1" bundle install && bundle exec rspec`.
 
 ## Moar Dokumentationz pleaze
 
