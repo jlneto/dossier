@@ -11,7 +11,6 @@ gem "activerecord",  RAILS_VERSION
 
 # gems used by the dummy application
 gem "jquery-rails"
-gem "mysql2"
 gem "pg"
 gem 'coveralls', require: false
 
